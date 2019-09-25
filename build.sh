@@ -66,6 +66,7 @@ if [ ! -f "$NUGET_EXE" ]; then
 fi
 
 # Restore tools from NuGet.
+echo "begin restore from nuget"
 pushd "$TOOLS_DIR" >/dev/null
 if [ ! -f "$PACKAGES_CONFIG_MD5" ] || [ "$( cat "$PACKAGES_CONFIG_MD5" | sed 's/\r$//' )" != "$( $MD5_EXE "$PACKAGES_CONFIG" | awk '{ print $1 }' )" ]; then
     find . -type d ! -name . ! -name 'Cake.Bakery' | xargs rm -rf
