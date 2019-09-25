@@ -1,4 +1,10 @@
+// Install modules
+#module nuget:?package=Cake.DotNetTool.Module&version=0.3.0
 
+// Install addins.
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Coveralls&version=0.10.0"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Twitter&version=0.10.0"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Gitter&version=0.11.0"
 
 #load "./build/parameters.cake"
 
