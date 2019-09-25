@@ -1,0 +1,18 @@
+<Project>
+  <Import Project="version.props" />
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Authors>virtual</Authors>
+    <Product>AzurePipelineDemo</Product>
+    <PackageIconUrl>https://github.com/cocosip/AzurePipelineDemo</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/cocosip/AzurePipelineDemo</PackageProjectUrl>
+    <PackageLicense>https://github.com/cocosip/AzurePipelineDemo/blob/master/LICENSE</PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/cocosip/AzurePipelineDemo</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>
