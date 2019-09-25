@@ -126,8 +126,8 @@ public class BuildParameters
             ReleaseNotes = null, //context.ParseReleaseNotes("./README.md"),
             IsPublishBuild = IsPublishing(target),
             IsReleaseBuild = IsReleasing(target),
-            SkipSigning = StringComparer.OrdinalIgnoreCase.Equals("True", context.Argument("skipsigning", "True")),
-            SkipGitVersion = StringComparer.OrdinalIgnoreCase.Equals("True", context.EnvironmentVariable("SKIP_GITVERSION")),
+            SkipSigning = true, //StringComparer.OrdinalIgnoreCase.Equals("True", context.Argument("skipsigning", "True")),
+            SkipGitVersion =false, //StringComparer.OrdinalIgnoreCase.Equals("True", context.EnvironmentVariable("SKIP_GITVERSION")),
             SkipOpenCover = true, //StringComparer.OrdinalIgnoreCase.Equals("True", context.EnvironmentVariable("CAKE_SKIP_OPENCOVER"))
             Projects = context.GetDirectories("./src/*"),
             TestProjects = context.GetDirectories("./test/*"),
