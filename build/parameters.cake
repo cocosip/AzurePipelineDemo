@@ -97,8 +97,10 @@ public class BuildParameters
 
     public static BuildParameters GetParameters(ICakeContext context)
     {
+         context.Information($"Cake----------begin--------------");
         if (context == null)
         {
+             context.Information($"xxxNULL");
             throw new ArgumentNullException("context");
         }
 
