@@ -120,7 +120,8 @@ if [ ! -f "$CAKE_EXE" ]; then
     echo "Could not find Cake.exe at '$CAKE_EXE'."
     exit 1
 fi
-
+echo "Start Cake!"
 # Start Cake
 #exec mono "$CAKE_EXE" $SCRIPT "${CAKE_ARGUMENTS[@]}"
 exec mono "$CAKE_EXE" build.cake --verbosity=$VERBOSITY --configuration=$CONFIGURATION --target=$TARGET $DRYRUN "${CAKE_ARGUMENTS[@]}"
+echo "Complete!"
