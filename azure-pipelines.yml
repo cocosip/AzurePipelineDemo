@@ -15,4 +15,6 @@ steps:
 
 - script: |
     chmod +x ./build.sh
+- script: |
+    ./build.sh
   displayName: 'Run a multi-line script'
