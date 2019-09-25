@@ -13,9 +13,6 @@ variables:
   buildConfiguration: 'Release'
   
 steps:
-- task: DotNetCoreInstaller@0
-  inputs:
-    version: '2.2.401'
 - script: dotnet restore
 - script: chmod +x ./build.sh
 - bash: |
