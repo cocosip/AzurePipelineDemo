@@ -144,16 +144,16 @@ public class BuildParameters
         context.Information($"ShouldPublish:{parameters.ShouldPublish}");
         context.Information($"ShouldPublishToNuGet:{parameters.ShouldPublishToNuGet}");
         context.Information($"---------------------AzurePipeline--------------");
-        context.Information($"TFBuild==null:{buildSystem.TFBuild==null}");
-        context.Information($"IsRunningOnAzurePipelines:{buildSystem.TFBuild.IsRunningOnAzurePipelines}");
-        context.Information($"IsHosted:{buildSystem.TFBuild.Environment.Agent.IsHosted}");
-        context.Information($"Branch:{buildSystem.TFBuild.Environment.Repository.Branch}");
-        context.Information($"SourceBranch :{buildSystem.TFBuild.Environment.Repository.SourceBranch }");
-        context.Information($"SourceVersion:{buildSystem.TFBuild.Environment.Repository.SourceVersion}");
-        context.Information($"Shelveset:{buildSystem.TFBuild.Environment.Repository.Shelveset}");
-        context.Information($"RepoName:{buildSystem.TFBuild.Environment.Repository.RepoName}");
-        context.Information($"Provider :{buildSystem.TFBuild.Environment.Repository.Provider}");
-        context.Information($"GitSubmoduleCheckout  :{buildSystem.TFBuild.Environment.Repository.GitSubmoduleCheckout }");
+        // context.Information($"TFBuild==null:{buildSystem.TFBuild==null}");
+        // context.Information($"IsRunningOnAzurePipelines:{buildSystem.TFBuild.IsRunningOnAzurePipelines}");
+        // context.Information($"IsHosted:{buildSystem.TFBuild.Environment.Agent.IsHosted}");
+        // context.Information($"Branch:{buildSystem.TFBuild.Environment.Repository.Branch}");
+        // context.Information($"SourceBranch :{buildSystem.TFBuild.Environment.Repository.SourceBranch }");
+        // context.Information($"SourceVersion:{buildSystem.TFBuild.Environment.Repository.SourceVersion}");
+        // context.Information($"Shelveset:{buildSystem.TFBuild.Environment.Repository.Shelveset}");
+        // context.Information($"RepoName:{buildSystem.TFBuild.Environment.Repository.RepoName}");
+        // context.Information($"Provider :{buildSystem.TFBuild.Environment.Repository.Provider}");
+        // context.Information($"GitSubmoduleCheckout  :{buildSystem.TFBuild.Environment.Repository.GitSubmoduleCheckout }");
         context.Information($"Cake BuildParameters:---------------end---------------");
         return parameters;
     }
