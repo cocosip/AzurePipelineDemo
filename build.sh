@@ -28,12 +28,20 @@ fi
 
 # Define default arguments.
 SCRIPT="build.cake"
-CAKE_ARGUMENTS=()
+TARGET="Publish"
+CONFIGURATION="Release"
+VERBOSITY="verbose"
+DRYRUN=
+CAKE_ARGUMENTS()
 
 # Parse arguments.
 for i in "$@"; do
     case $1 in
-        -s|--script) SCRIPT="$2"; shift ;;
+        #-s|--script) SCRIPT="$2"; shift ;;
+        -t|--target) TARGET="$2"; shift ;;
+        -c|--configuration) CONFIGURATION="$2"; shift ;;
+        -v|--verbosity) VERBOSITY="$2"; shift ;;
+        -d|--dryrun) DRYRUN="-dryrun" ;;
         --) shift; CAKE_ARGUMENTS+=("$@"); break ;;
         *) CAKE_ARGUMENTS+=("$1") ;;
     esac
@@ -66,13 +74,10 @@ if [ ! -f "$NUGET_EXE" ]; then
 fi
 
 # Restore tools from NuGet.
-echo "begin restore from nuget"
 pushd "$TOOLS_DIR" >/dev/null
 if [ ! -f "$PACKAGES_CONFIG_MD5" ] || [ "$( cat "$PACKAGES_CONFIG_MD5" | sed 's/\r$//' )" != "$( $MD5_EXE "$PACKAGES_CONFIG" | awk '{ print $1 }' )" ]; then
     find . -type d ! -name . ! -name 'Cake.Bakery' | xargs rm -rf
 fi
-
-echo "end Cake.Bakery,next:mono ExcludeVersion"
 
 mono "$NUGET_EXE" install -ExcludeVersion
 if [ $? -ne 0 ]; then
@@ -80,7 +85,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "PACKAGES_CONFIG"
 $MD5_EXE "$PACKAGES_CONFIG" | awk '{ print $1 }' >| "$PACKAGES_CONFIG_MD5"
 
 popd >/dev/null
@@ -118,4 +122,5 @@ if [ ! -f "$CAKE_EXE" ]; then
 fi
 
 # Start Cake
-exec mono "$CAKE_EXE" $SCRIPT "${CAKE_ARGUMENTS[@]}"
+#exec mono "$CAKE_EXE" $SCRIPT "${CAKE_ARGUMENTS[@]}"
+exec mono "$CAKE_EXE" build.cake --verbosity=$VERBOSITY --configuration=$CONFIGURATION --target=$TARGET $DRYRUN "${CAKE_ARGUMENTS[@]}"
