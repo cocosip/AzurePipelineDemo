@@ -107,8 +107,6 @@ public class BuildParameters
         var target = context.Argument("target", "Default");
         context.Information($"Target-------");
         var buildSystem = context.BuildSystem();
-        context.Information($"context.BuildSystem-------");
-        context.Information($"context----{context.Argument("configuration", "Release")}");
         var parameters = new BuildParameters
         {
             Target = target,
@@ -134,7 +132,7 @@ public class BuildParameters
             TestProjects = context.GetDirectories("./test/*"),
             ProjectFiles = context.GetFiles("./src/*/*.csproj"),
             TestProjectFiles = context.GetFiles("./test/AzurePipelineDemo.Test/*.csproj"),
-            PackageIds =new string[]{"AzurePipelineDemo"} //Util.GetPackageIds(context, context.GetFiles("./src/*/*.csproj"))
+            PackageIds =Util.GetPackageIds(context, context.GetFiles("./src/*/*.csproj"))
         };
         context.Information($"Cake BuildParameters:-------------begin--------------");
         context.Information($"IsLocalBuild:{parameters.IsLocalBuild}");
