@@ -105,8 +105,9 @@ public class BuildParameters
         }
 
         var target = context.Argument("target", "Default");
+        context.Information($"Target-------");
         var buildSystem = context.BuildSystem();
-
+       context.Information($"context.BuildSystem-------");
         var parameters = new BuildParameters
         {
             Target = target,
