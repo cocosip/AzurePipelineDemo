@@ -144,7 +144,7 @@ public class BuildParameters
         context.Information($"ShouldPublish:{parameters.ShouldPublish}");
         context.Information($"ShouldPublishToNuGet:{parameters.ShouldPublishToNuGet}");
         context.Information($"---------------------AzurePipeline--------------");
-        context.Information($"IsRunningOnTFBuild:{buildSystem.TFBuild.IsRunningOnTFBuild}");
+        context.Information($"IsRunningOnAzurePipelines:{buildSystem.TFBuild.IsRunningOnAzurePipelines}");
         context.Information($"IsHosted:{buildSystem.TFBuild.Environment.Agent.IsHosted}");
         context.Information($"Branch:{buildSystem.TFBuild.Environment.Repository.Branch}");
         context.Information($"SourceBranch :{buildSystem.TFBuild.Environment.Repository.SourceBranch }");
