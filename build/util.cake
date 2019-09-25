@@ -21,6 +21,7 @@ public class Util
             var content = System.IO.File.ReadAllText(project.FullPath);
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(content);
+            
             var packageId = doc.DocumentElement.SelectSingleNode("/Project/PropertyGroup/PackageId").InnerText;
             packageIds.Add(packageId);
         }
