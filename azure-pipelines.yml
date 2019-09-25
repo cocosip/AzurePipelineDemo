@@ -10,6 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '2.1.300'
 - script: chmod +x ./build.sh
 - bash: |
     ./build.sh
