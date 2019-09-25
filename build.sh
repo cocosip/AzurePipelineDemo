@@ -90,7 +90,6 @@ $MD5_EXE "$PACKAGES_CONFIG" | awk '{ print $1 }' >| "$PACKAGES_CONFIG_MD5"
 popd >/dev/null
 
 # Restore addins from NuGet.
-echo "Restore addins from NuGet......."
 if [ -f "$ADDINS_PACKAGES_CONFIG" ]; then
     pushd "$ADDINS_DIR" >/dev/null
 
@@ -104,7 +103,6 @@ if [ -f "$ADDINS_PACKAGES_CONFIG" ]; then
 fi
 
 # Restore modules from NuGet.
-echo "Restore modules from NuGet......."
 if [ -f "$MODULES_PACKAGES_CONFIG" ]; then
     pushd "$MODULES_DIR" >/dev/null
 
@@ -116,14 +114,13 @@ if [ -f "$MODULES_PACKAGES_CONFIG" ]; then
 
     popd >/dev/null
 fi
-echo "Make sure that Cake has been installed......."
+
 # Make sure that Cake has been installed.
 if [ ! -f "$CAKE_EXE" ]; then
     echo "Could not find Cake.exe at '$CAKE_EXE'."
     exit 1
 fi
-echo "Start Cake!"
+
 # Start Cake
 #exec mono "$CAKE_EXE" $SCRIPT "${CAKE_ARGUMENTS[@]}"
 exec mono "$CAKE_EXE" build.cake --verbosity=$VERBOSITY --configuration=$CONFIGURATION --target=$TARGET $DRYRUN "${CAKE_ARGUMENTS[@]}"
-echo "Complete!"

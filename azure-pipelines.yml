@@ -9,12 +9,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  buildConfiguration: 'Release'
-  
 steps:
-- script: dotnet restore
-- script: chmod +x ./build.sh
-- bash: |
-    ./build.sh
-  displayName: 'build script'
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    chmod +x ./build.sh
+  displayName: 'Run a multi-line script'

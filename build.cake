@@ -2,24 +2,20 @@
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
 
-// Install modules
-#module nuget:?package=Cake.DotNetTool.Module&version=0.3.0
-
-// Install addins.
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Coveralls&version=0.10.0"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Twitter&version=0.10.0"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Gitter&version=0.11.0"
-
 // Install tools.
-#tool "nuget:https://api.nuget.org/v3/index.json?package=coveralls.io&version=1.4.2"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=gitreleasemanager&version=0.7.0"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=GitVersion.CommandLine&version=3.6.2"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=coveralls.io&version=1.3.4"
 #tool "nuget:https://api.nuget.org/v3/index.json?package=OpenCover&version=4.6.519"
-#tool "nuget:https://api.nuget.org/v3/index.json?package=ReportGenerator&version=4.0.4"
-#tool "nuget:https://api.nuget.org/v3/index.json?package=nuget.commandline&version=4.9.2"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=ReportGenerator&version=2.4.5"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=SignClient&version=0.9.1&include=/tools/netcoreapp2.0/SignClient.dll"
+
 #load "./build/parameters.cake"
 
 BuildParameters parameters = BuildParameters.GetParameters(Context);
 bool publishingError = false;
 DotNetCoreMSBuildSettings msBuildSettings = null;
+FilePath signClientPath;
 
 ///////////////////////////////////////////////////////////////////////////////
 // SETUP / TEARDOWN
@@ -27,7 +23,6 @@ DotNetCoreMSBuildSettings msBuildSettings = null;
 
 Setup(ctx =>
 {
-  Information("Setup*********************");
    parameters.Initialize(ctx);
    // Executed BEFORE the first task.
    Information("Running tasks...");
@@ -47,7 +42,6 @@ Teardown(ctx =>
 Task("Clean")
    .Does(() =>
    {
-      Information("Clean");
       CleanDirectories(parameters.Paths.Directories.ToClean);
    });
 
@@ -65,10 +59,9 @@ Task("Restore-NuGet-Packages")
             },
             Sources = new [] { "https://api.nuget.org/v3/index.json" }
       };
-      Information("Restore");
       foreach (var project in parameters.ProjectFiles)
       {
-         Information(project.FullPath);
+         //Information(project.FullPath);
          DotNetCoreRestore(project.FullPath, settings);
       }
    });
@@ -78,10 +71,9 @@ Task("Build")
    .IsDependentOn("Restore-NuGet-Packages")
    .Does(() =>
    {
-      Information("Build");
       var settings = new DotNetCoreBuildSettings
       {
-            Configuration = parameters.Configuration,
+         Configuration = parameters.Configuration,
             VersionSuffix = parameters.Version.Suffix,
             ArgumentCustomization = args =>
             {
