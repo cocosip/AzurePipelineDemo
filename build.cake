@@ -27,6 +27,7 @@ DotNetCoreMSBuildSettings msBuildSettings = null;
 
 Setup(ctx =>
 {
+  Information("Setup*********************");
    parameters.Initialize(ctx);
    // Executed BEFORE the first task.
    Information("Running tasks...");
@@ -46,6 +47,7 @@ Teardown(ctx =>
 Task("Clean")
    .Does(() =>
    {
+      Information("Clean");
       CleanDirectories(parameters.Paths.Directories.ToClean);
    });
 
@@ -63,9 +65,10 @@ Task("Restore-NuGet-Packages")
             },
             Sources = new [] { "https://api.nuget.org/v3/index.json" }
       };
+      Information("Restore");
       foreach (var project in parameters.ProjectFiles)
       {
-         //Information(project.FullPath);
+         Information(project.FullPath);
          DotNetCoreRestore(project.FullPath, settings);
       }
    });
@@ -75,9 +78,10 @@ Task("Build")
    .IsDependentOn("Restore-NuGet-Packages")
    .Does(() =>
    {
+      Information("Build");
       var settings = new DotNetCoreBuildSettings
       {
-         Configuration = parameters.Configuration,
+            Configuration = parameters.Configuration,
             VersionSuffix = parameters.Version.Suffix,
             ArgumentCustomization = args =>
             {
